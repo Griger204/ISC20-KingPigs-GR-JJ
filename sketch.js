@@ -1,4 +1,4 @@
-let bimage;
+ let bimage;
 let collectImage
 function preload(){
 bimage = loadImage('shutterstock-519106648.jpg ');
@@ -16,7 +16,7 @@ person = new Person();
 }
 
 //Sets current scene
-var currentScene=0;
+var currentScene=6;
 
 //Team Name color Animation
 function tnameColor() {
@@ -169,12 +169,18 @@ function drawScene6(){
   obstacles(1950, 270, 20, 60);
   obstacles(2100, 270, 20, 20);
   obstacles(2170, 290, 20, 20);
-  obstacles(2400, 275, 20, 20);
+  obstacles(2300, 275, 20, 20);
+  obstacles(2350, 255, 20, 20);
   collectables(800, 310);
   collectables(830, 310);
   collectables(860, 310);
   collectables(890, 310);
   collectables(920, 310);
+  collectables(1110, 230);
+  collectables(1360, 310);
+  collectables(1500, 310);
+  collectables(1850, 250);
+  collectables(1700, 230);
   
 
 
