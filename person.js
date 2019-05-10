@@ -20,6 +20,14 @@ function Person() {
     stroke(200);
     fill(200, 100, 50);
     ellipse(this.pos.x, this.pos.y - 45, 30, 30);
+    fill(255, 255, 255);
+    ellipse(this.pos.x+5, this.pos.y-50, 5, 5);
+    ellipse(this.pos.x-4, this.pos.y-50, 5, 5);
+    fill(255, 0, 0);
+    ellipse(this.pos.x+4, this.pos.y-40, 7, 7);
+    fill(0, 0, 0);
+    ellipse(this.pos.x+6, this.pos.y-49, 4, 4);
+    ellipse(this.pos.x-3, this.pos.y-49, 4, 4);
     fill(50, 200, 50);
     rect(0, 330, 3000, 30);
     fill(0, 0, 0);
