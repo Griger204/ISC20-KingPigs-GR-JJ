@@ -1,8 +1,12 @@
+let bimage;
+function preload(){
+bimage = loadImage('shutterstock-519106648.jpg ');
+}
+
 var person;
 //var obstacle;
 
 function setup() {
-bimage = loadImage('shutterstock-519106648.jpg ');
 createCanvas(623, 360);
 grassImage = loadImage('228223_minecraft-grass-block-png (1).jpg')
 person = new Person();
@@ -10,7 +14,7 @@ person = new Person();
 }
 
 //Sets current scene
-var currentScene=0;
+var currentScene=6;
 
 //Team Name color Animation
 function tnameColor() {
@@ -145,8 +149,9 @@ function rectAnimation2(){
 
 function drawScene6(){
   currentScene = 6;
+  background(bimage);
   translate(-person.pos.x + 20, 0);
-  background('bimage');
+  
   person.display();
   person.update();
   person.edges();
