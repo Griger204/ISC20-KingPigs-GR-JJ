@@ -1,6 +1,8 @@
 let bimage;
+let collectImage
 function preload(){
 bimage = loadImage('shutterstock-519106648.jpg ');
+collectimage = loadImage('1241505.png');
 }
 
 var person;
@@ -151,7 +153,6 @@ function drawScene6(){
   currentScene = 6;
   background(bimage);
   translate(-person.pos.x + 20, 0);
-  
   person.display();
   person.update();
   person.edges();
@@ -159,6 +160,21 @@ function drawScene6(){
   person.applyForce(gravity);
   obstacles(500, 270, 20, 60);
   obstacles(600, 270, 20, 60);
+  obstacles(1100, 290, 20, 40);
+  obstacles(1200, 280, 20, 50);
+  obstacles(1300, 270, 20, 60);
+  obstacles(1430, 260, 20, 70);
+  obstacles(1700, 300, 50, 30);
+  obstacles(1850, 300, 50, 30);
+  obstacles(1950, 270, 20, 60);
+  obstacles(2100, 270, 20, 20);
+  obstacles(2170, 290, 20, 20);
+  obstacles(2400, 275, 20, 20);
+  collectables(800, 310);
+  collectables(830, 310);
+  collectables(860, 310);
+  collectables(890, 310);
+  collectables(920, 310);
   
 
 
