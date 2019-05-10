@@ -16,7 +16,7 @@ person = new Person();
 }
 
 //Sets current scene
-var currentScene=6;
+var currentScene=0;
 
 //Team Name color Animation
 function tnameColor() {
