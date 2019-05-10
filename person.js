@@ -1,21 +1,24 @@
 function Person() {
   this.pos = createVector(20, height);
-  this.vel = createVector(0.6, 0);
+  this.vel = createVector(0.7, 0);
   this.acc = createVector(0.6, 0);
   this.mass = 5;
   this.jump = 0;
   this.Life = 3;
+  this.food = 0;
   this.applyForce = function(force) {
   this.acc.add(force);
 }
   
-   this.update = function() {
+  
+    this.update = function() {
     this.vel.add(this.acc);
     this.pos.add(this.vel);
     this.acc.set(0, 0);
   }
   
   this.display = function() {
+    
     fill(59, 237, 151);
     stroke(200);
     fill(200, 100, 50);
@@ -36,6 +39,8 @@ function Person() {
     text("l", 470   , 310)
     text("Jump!", 555, 290);
     text("l", 570, 310)
+    text("Collect!", 790, 270);
+    text("l", 790, 290);
   }
   
   this.edges = function(){
@@ -45,6 +50,9 @@ function Person() {
     } if (this.pos.y <= 50){
       this.vel.y *= -1;
       //this.pos.y = height;
+    } if (this.pos.x >= 3000){
+      this.vel.x = 0;  
+      
     }
   }
 }
@@ -52,4 +60,9 @@ function Person() {
 function obstacles(x, y, m, n){
     fill(0, 0, 0);
     rect(x, y, m, n);
+}
+
+collectables = function(x, y){
+  fill(255, 255, 255);
+  ellipse(x, y, 20, 20);
 }
