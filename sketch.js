@@ -1,22 +1,38 @@
- let bimage;
+let bimage;
+let grassImage;
 let collectImage
 function preload(){
-bimage = loadImage('shutterstock-519106648.jpg ');
+bimage = loadImage('shutterstock-519106648.jpg');
 collectimage = loadImage('1241505.png');
+grassImage = loadImage('vPyllu4r_400x400 (1).png');
 }
 
 var person;
+//var collectables;
 //var obstacle;
+var rec = [];
+var collect = [];
 
 function setup() {
 createCanvas(623, 360);
-grassImage = loadImage('228223_minecraft-grass-block-png (1).jpg')
 person = new Person();
+for (let i = 0; i < 30; i++){
+ rec[i]= new block(random(400,2800),random(0,height - 50));
+}
+  
+for (let i = 0; i < 1; i++){
+  collect[i] = new coin();
+}
+     
+     
+
+
+//Collectables = new collectables();
 
 }
 
 //Sets current scene
-var currentScene=0;
+var currentScene=6;
 
 //Team Name color Animation
 function tnameColor() {
@@ -157,35 +173,42 @@ function drawScene6(){
   person.update();
   person.edges();
   var gravity = createVector(0, 0.2);
+  //person.collecting();
   person.applyForce(gravity);
-  obstacles(500, 270, 20, 60);
-  obstacles(600, 270, 20, 60);
-  obstacles(1100, 290, 20, 40);
-  obstacles(1200, 280, 20, 50);
-  obstacles(1300, 270, 20, 60);
-  obstacles(1430, 260, 20, 70);
-  obstacles(1700, 300, 50, 30);
-  obstacles(1850, 300, 50, 30);
-  obstacles(1950, 270, 20, 60);
-  obstacles(2100, 270, 20, 20);
-  obstacles(2170, 290, 20, 20);
-  obstacles(2300, 275, 20, 20);
-  obstacles(2350, 255, 20, 20);
-  collectables(800, 310);
-  collectables(830, 310);
-  collectables(860, 310);
-  collectables(890, 310);
-  collectables(920, 310);
-  collectables(1110, 230);
-  collectables(1360, 310);
-  collectables(1500, 310);
-  collectables(1850, 250);
-  collectables(1700, 230);
-  
-
-
-  
+ 
+for (let i = 0; i < rec.length; i++){
+  rec[i].display();
 }
+  
+for (let i = 0; i < collect.length; i++){
+  collect[i].display();
+}
+  
+//   obstacles(500, 270, 20, 60);
+//   obstacles(600, 270, 20, 60);
+//   obstacles(1100, 290, 20, 40);
+//   obstacles(1200, 280, 20, 50);
+//   obstacles(1300, 270, 20, 60);
+//   obstacles(1430, 260, 20, 70);
+//   obstacles(1700, 300, 50, 30);
+//   obstacles(1850, 300, 50, 30);
+//   obstacles(1950, 270, 20, 60);
+//   obstacles(2100, 270, 20, 20);
+//   obstacles(2170, 290, 20, 20);
+//   obstacles(2300, 275, 20, 20);
+//   obstacles(2350, 255, 20, 20);
+//   //Collectables.collecting();
+//   collectables(800, 315);
+//   collectables(830, 315);
+//   collectables(860, 315);
+//   collectables(890, 315);
+//   collectables(920, 315);
+//   collectables(1110, 230);
+//   collectables(1360, 315);
+//   collectables(1500, 315);
+//   collectables(1850, 250);
+//   collectables(1700, 230);
+ }
 
 function draw(){
   
@@ -207,7 +230,9 @@ function draw(){
       drawScene5();
     }else if (currentScene === 6){
       drawScene6();
-    }
+      }
+  
+
   //drawScene6();
 }
   
@@ -233,8 +258,15 @@ function mouseClicked() {
         drawScene3();
       } else if (currentScene === 5 && mouseX >= 527 && mouseX <= 597 && mouseY >= 307 && mouseY <= 347){
         drawScene6();
-      }
+      } 
   
+}
+
+function keyPressed(){
+  if (key === ' ' /*&& person.pos.y === height*/){
+    var jump = createVector (0, -6);
+    person.applyForce(jump);
+  }
 }
 
 function keyPressed(){
