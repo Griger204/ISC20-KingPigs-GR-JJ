@@ -8,6 +8,7 @@ grassImage = loadImage('vPyllu4r_400x400 (1).png');
 }
 
 var person;
+var score = 0;
 //var collectables;
 //var obstacle;
 var rec = [];
@@ -20,8 +21,8 @@ for (let i = 0; i < 30; i++){
  rec[i]= new block(random(400,2800),random(0,height - 50));
 }
   
-for (let i = 0; i < 1; i++){
-  collect[i] = new coin();
+for (let i = 0; i < 25; i++){
+  collect[i] = new coin(random(600, 2900), random (0, height - 50));
 }
      
      
@@ -175,6 +176,8 @@ function drawScene6(){
   var gravity = createVector(0, 0.2);
   //person.collecting();
   person.applyForce(gravity);
+  collision();
+
  
 for (let i = 0; i < rec.length; i++){
   rec[i].display();
@@ -184,30 +187,6 @@ for (let i = 0; i < collect.length; i++){
   collect[i].display();
 }
   
-//   obstacles(500, 270, 20, 60);
-//   obstacles(600, 270, 20, 60);
-//   obstacles(1100, 290, 20, 40);
-//   obstacles(1200, 280, 20, 50);
-//   obstacles(1300, 270, 20, 60);
-//   obstacles(1430, 260, 20, 70);
-//   obstacles(1700, 300, 50, 30);
-//   obstacles(1850, 300, 50, 30);
-//   obstacles(1950, 270, 20, 60);
-//   obstacles(2100, 270, 20, 20);
-//   obstacles(2170, 290, 20, 20);
-//   obstacles(2300, 275, 20, 20);
-//   obstacles(2350, 255, 20, 20);
-//   //Collectables.collecting();
-//   collectables(800, 315);
-//   collectables(830, 315);
-//   collectables(860, 315);
-//   collectables(890, 315);
-//   collectables(920, 315);
-//   collectables(1110, 230);
-//   collectables(1360, 315);
-//   collectables(1500, 315);
-//   collectables(1850, 250);
-//   collectables(1700, 230);
  }
 
 function draw(){
@@ -230,6 +209,12 @@ function draw(){
       drawScene5();
     }else if (currentScene === 6){
       drawScene6();
+      translate(person.pos.x, 0);
+      textSize(15);
+      text('Score:' + score, 0, 355);
+      text('Jumps:'+ person.jump, 100, 355)
+      text('Lives:'+ person.life, 200, 355);
+      
       }
   
 
@@ -266,12 +251,6 @@ function keyPressed(){
   if (key === ' ' /*&& person.pos.y === height*/){
     var jump = createVector (0, -6);
     person.applyForce(jump);
-  }
-}
-
-function keyPressed(){
-  if (key === ' '){
-    var jump = createVector (0, -8);
-    person.applyForce(jump);
+    person.jump++;
   }
 }
