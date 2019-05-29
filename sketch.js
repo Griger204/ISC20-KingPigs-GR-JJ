@@ -8,32 +8,32 @@ grassImage = loadImage('vPyllu4r_400x400 (1).png');
 }
 
 var person;
-var score = 0;
+
 //var collectables;
 //var obstacle;
+var hit;
 var rec = [];
 var collect = [];
 
 function setup() {
 createCanvas(623, 360);
+question = new questions();
+//calling obstacles and collectables as an array
 person = new Person();
+  //Calling Block
 for (let i = 0; i < 30; i++){
- rec[i]= new block(random(400,2800),random(0,height - 50));
+ rec[i]= new
+ block(random(400,2800),random(0,height - 50));
 }
-  
+  //Calling coin
 for (let i = 0; i < 25; i++){
   collect[i] = new coin(random(600, 2900), random (0, height - 50));
 }
-     
-     
-
-
-//Collectables = new collectables();
-
+  
 }
 
 //Sets current scene
-var currentScene=6;
+var currentScene=0;
 
 //Team Name color Animation
 function tnameColor() {
@@ -174,20 +174,47 @@ function drawScene6(){
   person.update();
   person.edges();
   var gravity = createVector(0, 0.2);
-  //person.collecting();
   person.applyForce(gravity);
-  collision();
 
- 
+//displaying obstacles and collectables
 for (let i = 0; i < rec.length; i++){
-  rec[i].display();
+  if (person.hitsBlock(rec[i].x, rec[i].y)){
+    drawScene6();
+    person = new Person();
+    //collect[i] = new coin();
+    person.life--;
+    if (coin.trans === 0){
+      person.hits = false
+    }
+  }
+     rec[i].display();
 }
   
-for (let i = 0; i < collect.length; i++){
-  collect[i].display();
-}
+for (let i = 0; i < collect.length; i++){ 
+if(person.hits(collect[i].x,collect[i].y)){
+  person.score++;
+  //collect[i].trans = 0;
+   //console.log("score");
+   //person.hits = true
+ collect[i].x -= 100;
   
  }
+  
+  collect[i].display();
+  
+}
+ }
+
+  //////////\\\\\\\\\\\         
+ //** The questions** \\
+/////////////\\\\\\\\\\\\
+
+function drawScene8(){
+  currentScene = 8;
+  background (mouseX, 200, mouseY);
+  questions();
+  question.display();
+}
 
 function draw(){
   
@@ -211,14 +238,12 @@ function draw(){
       drawScene6();
       translate(person.pos.x, 0);
       textSize(15);
-      text('Score:' + score, 0, 355);
-      text('Jumps:'+ person.jump, 100, 355)
-      text('Lives:'+ person.life, 200, 355);
-      
-      }
-  
+      text('Score:' + person.score, 0, 345);
+      text('Jumps:'+ person.jump, 100, 345)
+      text('Lives:'+ person.life, 200, 345);
 
-  //drawScene6();
+      }
+  //drawScene8();
 }
   
 
@@ -241,11 +266,11 @@ function mouseClicked() {
         drawScene5();
       } if (currentScene === 5 && mouseX >= 23 && mouseX <= 93 && mouseY >= 307 && mouseY <= 347){
         drawScene3();
-      } else if (currentScene === 5 && mouseX >= 527 && mouseX <= 597 && mouseY >= 307 && mouseY <= 347){
+      } if (currentScene === 5 && mouseX >= 527 && mouseX <= 597 && mouseY >= 307 && mouseY <= 347){
         drawScene6();
-      } 
-  
+      }
 }
+
 
 function keyPressed(){
   if (key === ' ' /*&& person.pos.y === height*/){
@@ -254,3 +279,5 @@ function keyPressed(){
     person.jump++;
   }
 }
+
+
