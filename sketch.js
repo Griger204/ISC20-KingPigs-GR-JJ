@@ -5,6 +5,7 @@ function preload(){
 bimage = loadImage('shutterstock-519106648.jpg');
 collectimage = loadImage('1241505.png');
 grassImage = loadImage('vPyllu4r_400x400 (1).png');
+//logo = loadImage('');
 }
 
 var person;
@@ -162,6 +163,18 @@ function rectAnimation2(){
   recHH = cos(millis()*1);
 }
 
+function drawScene7(){
+  currentScene = 7;
+  background(255, 238, 0)
+  textAlign(CENTER)
+  textSize(50);
+  fill(0)
+  text('YOU WIN!!!!', 300, 150);
+  textSize(20)
+  text('Congratulation!', 300, 120);
+  drawButton(548, 315, "Continue")
+}
+
   ///////////\\\\\\\\\\\         
  //***** THE GAME***** \\
 /////////////\\\\\\\\\\\\\
@@ -241,10 +254,13 @@ function draw(){
       text('Score:' + person.score, 0, 345);
       text('Jumps:'+ person.jump, 100, 345)
       text('Lives:'+ person.life, 200, 345);
-
+      if (person.pos.x >= 3000){
+        drawScene7();
       }
-  //drawScene8();
-}
+    }
+  //drawScene7();
+    }
+
   
 
 function mouseClicked() {
@@ -257,7 +273,6 @@ function mouseClicked() {
       
       } else if (currentScene === 2 && mouseX >= 200 && mouseX <= 270 && mouseY >= 200 && mouseY <= 240){
         drawScene4();
-        //currentScene++;
       } if (currentScene === 4 && mouseX >= 23 && mouseX <= 93 && mouseY >= 307 && mouseY <= 347){
         drawScene2();
       } if (currentScene === 3 && mouseX >= 23 && mouseX <= 93 && mouseY >= 307 && mouseY <= 347){
@@ -268,6 +283,8 @@ function mouseClicked() {
         drawScene3();
       } if (currentScene === 5 && mouseX >= 527 && mouseX <= 597 && mouseY >= 307 && mouseY <= 347){
         drawScene6();
+      } if (currentScene === 7 && mouseX >= 548 && mouseX <= 618    && mouseY >= 315 && mouseY <= 355){
+        drawScene8();
       }
 }
 
@@ -279,5 +296,7 @@ function keyPressed(){
     person.jump++;
   }
 }
+
+
 
 
