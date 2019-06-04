@@ -172,7 +172,7 @@ function drawScene7(){
   text('YOU WIN!!!!', 300, 150);
   textSize(20)
   text('Congratulation!', 300, 120);
-  drawButton(548, 315, "Continue")
+  drawButton(547, 315, "Next")
 }
 
   ///////////\\\\\\\\\\\         
@@ -247,18 +247,34 @@ function draw(){
       drawScene4();
     } if (currentScene === 5){
       drawScene5();
-    }else if (currentScene === 6){
+    } if (currentScene === 6){
       drawScene6();
       translate(person.pos.x, 0);
       textSize(15);
       text('Score:' + person.score, 0, 345);
       text('Jumps:'+ person.jump, 100, 345)
       text('Lives:'+ person.life, 200, 345);
+    
       if (person.pos.x >= 3000){
         drawScene7();
+      } 
+    }if (currentScene === 7){
+        drawScene7();
+      } if (currentScene === 8){
+        drawScene8();
       }
-    }
-  //drawScene7();
+    
+  //drawScene8();
+  
+  
+  /*textSize(100);
+  text('thank u, next', width/2-280, height/2);
+  
+   textSize(90);
+  fill(random(255),random(255),random(255));
+text('thank u, next', width/2-280, height/2);*/
+  
+  
     }
 
   
@@ -283,8 +299,10 @@ function mouseClicked() {
         drawScene3();
       } if (currentScene === 5 && mouseX >= 527 && mouseX <= 597 && mouseY >= 307 && mouseY <= 347){
         drawScene6();
-      } if (currentScene === 7 && mouseX >= 548 && mouseX <= 618    && mouseY >= 315 && mouseY <= 355){
+      } if (currentScene === 7 && mouseX >= 548 && mouseX <= 618 && mouseY >= 315 && mouseY <= 355){
         drawScene8();
+      }if (currentScene === 8 && question.addition && mouseX >=100 && mouseX <= 170 && mouseY >= 200 && mouseY <= 240){
+        drawScene7();
       }
 }
 
@@ -296,7 +314,4 @@ function keyPressed(){
     person.jump++;
   }
 }
-
-
-
 
