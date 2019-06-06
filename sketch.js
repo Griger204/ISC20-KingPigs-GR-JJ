@@ -162,7 +162,7 @@ function rectAnimation2(){
   recLL = cos(millis()*1);
   recHH = cos(millis()*1);
 }
-
+//YOU WIN
 function drawScene7(){
   currentScene = 7;
   background(255, 238, 0)
@@ -173,6 +173,40 @@ function drawScene7(){
   textSize(20)
   text('Congratulation!', 300, 120);
   drawButton(547, 315, "Next")
+}
+//YOU LOSE
+function drawScene9(){
+  currentScene = 9;
+  background(255, 0, 0)
+  textAlign(CENTER)
+  textSize(50);
+  fill(0)
+  text('YOU LOSE!!!!', 300, 150);
+  textSize(20)
+  drawButton(547, 315, 'Menu')
+}
+//TRY AGAIN
+function drawScene10(){
+  currentScene = 10;
+  background(255, 0, 0);
+  textAlign(CENTER);
+  textSize(50);
+  fill(0);
+  text('Try Again', 300, 150);
+  textSize(20)
+  text('oops', 300, 120)
+  drawButton(547, 315, 'Again')
+}
+function drawScene11(){
+  currentScene = 11;
+  background(0, 247, 28);
+  textAlign(CENTER);
+  textSize(50);
+  fill(0);
+  text('Well Done', 300, 150);
+  textSize(20)
+  text('Yay', 300, 120)
+  drawButton(547, 315, 'Next')
 }
 
   ///////////\\\\\\\\\\\         
@@ -192,16 +226,17 @@ function drawScene6(){
 //displaying obstacles and collectables
 for (let i = 0; i < rec.length; i++){
   if (person.hitsBlock(rec[i].x, rec[i].y)){
+
     drawScene6();
-    person = new Person();
-    //collect[i] = new coin();
-    person.life--;
-    if (coin.trans === 0){
-      person.hits = false
-    }
+    //person = new Person();
+    person.life --;
+
   }
      rec[i].display();
 }
+  if (person.life === 0){
+      drawScene9();
+    }
   
 for (let i = 0; i < collect.length; i++){ 
 if(person.hits(collect[i].x,collect[i].y)){
@@ -227,6 +262,11 @@ function drawScene8(){
   background (mouseX, 200, mouseY);
   questions();
   question.display();
+  if(questions.tiesGood === 4){
+  }
+  if(questions.triesBad === 6){
+    drawScene9();
+  }
 }
 
 function draw(){
@@ -262,9 +302,11 @@ function draw(){
         drawScene7();
       } if (currentScene === 8){
         drawScene8();
+      }if (currentScene === 9){
+        drawScene9();
       }
     
-  //drawScene8();
+  //drawScene11();
   
   
   /*textSize(100);
@@ -301,9 +343,40 @@ function mouseClicked() {
         drawScene6();
       } if (currentScene === 7 && mouseX >= 548 && mouseX <= 618 && mouseY >= 315 && mouseY <= 355){
         drawScene8();
-      }if (currentScene === 8 && question.addition && mouseX >=100 && mouseX <= 170 && mouseY >= 200 && mouseY <= 240){
-        drawScene7();
       }
+  if (currentScene === 9 && mouseX >=547 && mouseX <= 617 && mouseY >= 315 && mouseY <= 355)      {
+        drawScene2();
+        person = new Person();
+      } 
+  
+  //QUESTIONS CORRECT
+  if (currentScene ===8 && question.addition && mouseX >= 100 && mouseX <= 170 && mouseY >= 200 && mouseY <= 240){
+    drawScene11();
+    questions.triesGood++;
+  } if (currentScene ===8 && question.subtract && mouseX >= 280 && mouseX <= 350 && mouseY >= 200 && mouseY <= 240){
+    drawScene11();
+    questions.triesGood++;
+  } else if (currentScene ===8 && question.multiply && mouseX >= 460 && mouseX <= 530 && mouseY >= 200 && mouseY <= 240){
+    drawScene11();
+    questions.triesGood++;
+  }
+  
+  //QUESTIONS WRONG
+  if (currentScene ===8 && question.addition && mouseX >= 280 && mouseX <= 350 && mouseY >= 200 && mouseY <= 240 ||  mouseX >= 460 && mouseX <= 530 && mouseY >= 200 && mouseY <= 240){
+    drawScene10();
+    questions.triesBad++;
+  }
+  //Correct Scene
+  if (currentScene ===11 && mouseX >= 547 && mouseX <= 617 && mouseY >= 315 && mouseY <= 355){
+    drawScene8();
+    question = new questions();
+  }
+  //Wrong Scene
+  if (currentScene ===10 && mouseX >= 547 && mouseX <= 617 && mouseY >= 315 && mouseY <= 355){
+    drawScene8();
+    question = new questions();
+  }
+      
 }
 
 
