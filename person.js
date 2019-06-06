@@ -1,12 +1,14 @@
 function Person() {
   this.pos = createVector(20, height);
-  this.vel = createVector(0.7, 0);
+  this.vel = createVector(5, 0);
   this.acc = createVector(0.8, 0);
   this.mass = 5;
   this.jump = 0;
   this.life = 3;
   this.food = 0;
   this.score = 0;
+  this.triesGood = 0;
+  this.triesBad = 0;
 
   this.applyForce = function(force) {
   this.acc.add(force);
@@ -23,7 +25,7 @@ function Person() {
   
   this.hitsBlock = function(x,y){
   var d = dist(this.pos.x, this.pos.y, x,y)
-   if (d <= 10){
+   if (d <= 5){
     return true;
   }else{
     return false;
