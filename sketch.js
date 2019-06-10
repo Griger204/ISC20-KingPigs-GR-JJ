@@ -22,13 +22,13 @@ question = new questions();
 //calling obstacles and collectables as an array
 person = new Person();
   //Calling Block
-for (let i = 0; i < 30; i++){
+for (let i = 0; i < 50; i++){
  rec[i]= new
- block(random(400,2800),random(0,height - 50));
+ block(random(400,4900),random(0,height - 50));
 }
   //Calling coin
-for (let i = 0; i < 25; i++){
-  collect[i] = new coin(random(600, 2900), random (0, height - 50));
+for (let i = 0; i < 40; i++){
+  collect[i] = new coin(random(600, 4900), random (0, height - 50));
 }
   
 }
@@ -295,7 +295,7 @@ function draw(){
       text('Jumps:'+ person.jump, 100, 345)
       text('Lives:'+ person.life, 200, 345);
     
-      if (person.pos.x >= 3000){
+      if (person.pos.x >= 4980){
         drawScene7();
       } 
     }if (currentScene === 7){
@@ -322,6 +322,7 @@ text('thank u, next', width/2-280, height/2);*/
   
 
 function mouseClicked() {
+  //SCENE CHANGES
     if ( currentScene === 1 && mouseX >= 548 && mouseX <= 618    && mouseY >= 315 && mouseY <= 355) {
         drawScene2();
         //currentScene++;
@@ -350,22 +351,38 @@ function mouseClicked() {
       } 
   
   //QUESTIONS CORRECT
+  //addition
   if (currentScene ===8 && question.addition && mouseX >= 100 && mouseX <= 170 && mouseY >= 200 && mouseY <= 240){
     drawScene11();
-    questions.triesGood++;
-  } if (currentScene ===8 && question.subtract && mouseX >= 280 && mouseX <= 350 && mouseY >= 200 && mouseY <= 240){
-    drawScene11();
-    questions.triesGood++;
-  } else if (currentScene ===8 && question.multiply && mouseX >= 460 && mouseX <= 530 && mouseY >= 200 && mouseY <= 240){
-    drawScene11();
-    questions.triesGood++;
+  }
+  if (currentScene ===8 && question.addition && mouseX >= 280 && mouseX <= 350 && mouseY >= 200 && mouseY <= 240){
+      drawScene10();
+      }
+    if (currentScene ===8 && question.addition && mouseX >= 460 && mouseX <= 510 && mouseY >= 200 && mouseY <= 140){
+      drawScene10();
   }
   
-  //QUESTIONS WRONG
-  if (currentScene ===8 && question.addition && mouseX >= 280 && mouseX <= 350 && mouseY >= 200 && mouseY <= 240 ||  mouseX >= 460 && mouseX <= 530 && mouseY >= 200 && mouseY <= 240){
-    drawScene10();
-    questions.triesBad++;
+  //subtraction
+  if (currentScene ===8 && question.subtract && mouseX >= 280 && mouseX <= 350 && mouseY >= 200 && mouseY <= 240){
+    drawScene11();
   }
+  if (currentScene ===8 && question.subtract && mouseX >= 100 && mouseX <= 170 && mouseY >= 200 && mouseY <= 240){
+      drawScene10();
+      }
+    if (currentScene ===8 && question.subtract && mouseX >= 460 && mouseX <= 510 && mouseY >= 200 && mouseY <= 240){
+      drawScene10();
+  }
+  //multiplication
+  if (currentScene ===8 && question.multiply && mouseX >= 460 && mouseX <= 510 && mouseY >= 200 && mouseY <= 240){
+    drawScene11();
+  }
+  if (currentScene ===8 && question.multiply && mouseX >= 100 && mouseX <= 170 && mouseY >= 200 && mouseY <= 240){
+      drawScene10();
+      }
+    if (currentScene ===8 && question.multiply && mouseX >= 280 && mouseX <= 350 && mouseY >= 200 && mouseY <= 140){
+      drawScene10();
+  }
+  
   //Correct Scene
   if (currentScene ===11 && mouseX >= 547 && mouseX <= 617 && mouseY >= 315 && mouseY <= 355){
     drawScene8();
@@ -387,4 +404,3 @@ function keyPressed(){
     person.jump++;
   }
 }
-
