@@ -2,16 +2,15 @@ let bimage;
 let grassImage;
 let collectImage
 function preload(){
-bimage = loadImage('shutterstock-519106648.jpg');
+bimage = loadImage('Untitled-1.png');
 collectimage = loadImage('1241505.png');
 grassImage = loadImage('vPyllu4r_400x400 (1).png');
-//logo = loadImage('');
+logo = loadImage('KingPigLogo.png');
+win = loadImage('winScreen.png');
+person1 = loadImage('stickman.png')
 }
 
 var person;
-
-//var collectables;
-//var obstacle;
 var hit;
 var rec = [];
 var collect = [];
@@ -21,6 +20,7 @@ createCanvas(623, 360);
 question = new questions();
 //calling obstacles and collectables as an array
 person = new Person();
+person2 = new Person2();
   //Calling Block
 for (let i = 0; i < 50; i++){
  rec[i]= new
@@ -58,11 +58,10 @@ function rectColorRules(){
 //First Scene (intro)
 function drawScene1 (){
     currentScene = 1;
-    background (112, 247, 90);
-    rectAnimation();
+    background (104, 162, 255);
+    image(logo, 40, -70);
     fill(229, 57, 94);
     textSize(35);
-    text("Logo goes here",160, 150);
     //text("King Pigs", 200, 300);
     drawButton(548, 315, "Next");
 }
@@ -214,9 +213,9 @@ function drawScene11(){
 /////////////\\\\\\\\\\\\\
 
 function drawScene6(){
-  currentScene = 6;
-  background(bimage);
-  translate(-person.pos.x + 20, 0);
+  this.currentScene = 6;
+  this.background(bimage);
+  this.translate(-person.pos.x + 20, 0);
   person.display();
   person.update();
   person.edges();
@@ -252,6 +251,32 @@ if(person.hits(collect[i].x,collect[i].y)){
   
 }
  }
+
+function drawlvl2(){
+  person = new Person();
+  currentScene = 62;
+  background(bimage);
+  person.display();
+  person.update();
+  person.edges();
+  translate(-person.pos.x + 20, 0);
+  var gravity = createVector(0, 0.2);
+  person.applyForce(gravity);
+
+
+   //displaying obstacles and collectables
+  
+   // rec[i].display();
+  
+  
+  if (person.life === 0) {
+    drawScene9();
+  }
+
+ 
+ // collect[i].display();
+  person.vel = createVector(3,0);
+}
 
   //////////\\\\\\\\\\\         
  //** The questions** \\
@@ -304,9 +329,12 @@ function draw(){
         drawScene8();
       }if (currentScene === 9){
         drawScene9();
+      } if (currentScene === 62){
+        drawlvl2();
+        translate(person.pos.x, 0);
       }
     
-  //drawScene11();
+  //drawlvl2();
   
   
   /*textSize(100);
@@ -364,7 +392,10 @@ function mouseClicked() {
   
   //subtraction
   if (currentScene ===8 && question.subtract && mouseX >= 280 && mouseX <= 350 && mouseY >= 200 && mouseY <= 240){
-    drawScene11();
+    drawScene6();
+    // person = new Person();
+    // person.vel = createVector(4, 0)
+    drawlvl2();
   }
   if (currentScene ===8 && question.subtract && mouseX >= 100 && mouseX <= 170 && mouseY >= 200 && mouseY <= 240){
       drawScene10();
