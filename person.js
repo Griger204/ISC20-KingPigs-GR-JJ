@@ -1,6 +1,6 @@
 function Person() {
   this.pos = createVector(20, height);
-  this.vel = createVector(5, 0);
+  this.vel = createVector(2, 0);
   this.acc = createVector(0.8, 0);
   this.mass = 5;
   this.jump = 0;
@@ -37,26 +37,16 @@ function Person() {
     this.vel.add(this.acc);
     this.pos.add(this.vel);
     this.acc.set(0, 0);
+     
     //this.hits(coin);
     //this.hits(block);
   }
   
   this.display = function() {
     var r = 30;
-    fill(59, 237, 151);
-    stroke(200);
-    fill(200, 100, 50);
-    ellipse(this.pos.x, this.pos.y - 45, 30, r);
-    fill(255, 255, 255);
-    ellipse(this.pos.x+5, this.pos.y-50, 5, 5);
-    ellipse(this.pos.x-4, this.pos.y-50, 5, 5);
-    fill(255, 0, 0);
-    ellipse(this.pos.x+4, this.pos.y-40, 7, 7);
-    fill(0, 0, 0);
-    ellipse(this.pos.x+6, this.pos.y-49, 4, 4);
-    ellipse(this.pos.x-3, this.pos.y-49, 4, 4);
-    fill(50, 200, 50);
-    rect(0, 330, 3020, 30);
+    image(person1, this.pos.x, this.pos.y - 130,100,100);
+    fill(30, 30, 250);
+    rect(0, 330, 5000, 30);
     fill(0, 0, 0);
     textSize(15)
     text("Level 1", 175, 200)
@@ -70,10 +60,11 @@ function Person() {
     } if (this.pos.y <= 50){
       this.vel.y *= -1;
       //this.pos.y = height;
-    } if (this.pos.x >= 3000){
+    } if (this.pos.x >= 4980){
       
       this.vel.x = 0;  
       
     }
   }
 }
+
