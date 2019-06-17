@@ -1,13 +1,19 @@
-let bimage;
-let grassImage;
-let collectImage
+//let bimage;
+//let grassImage;
+//let collectImage
 function preload(){
+//preloading images
 bimage = loadImage('Untitled-1.png');
+lvl2back = loadImage('Untitled drawing.jpg')
+lvl3back = loadImage('lvl3back.jpg')
+lvllock = loadImage('lockedlevel.jpg')
 collectimage = loadImage('1241505.png');
 grassImage = loadImage('vPyllu4r_400x400 (1).png');
 logo = loadImage('KingPigLogo.png');
-win = loadImage('winScreen.png');
+win = loadImage('youwin.jpg');
 person1 = loadImage('stickman.png')
+//person2 = loadImage('unicornperson.png')
+
 }
 
 var person;
@@ -21,14 +27,17 @@ question = new questions();
 //calling obstacles and collectables as an array
 person = new Person();
 person2 = new Person2();
+//levelMenu = new levelmenu3();
+//levelMenu = new levelmenu2();
+//levelMenu = new levelmenu1();
   //Calling Block
-for (let i = 0; i < 50; i++){
+for (let i = 0; i < 200; i++){
  rec[i]= new
- block(random(400,4900),random(0,height - 50));
+ block(random(400,5900),random(0,height - 50));
 }
   //Calling coin
-for (let i = 0; i < 40; i++){
-  collect[i] = new coin(random(600, 4900), random (0, height - 50));
+for (let i = 0; i < 70; i++){
+  collect[i] = new coin(random(600, 5900), random (0, height - 50));
 }
   
 }
@@ -69,6 +78,7 @@ function drawScene1 (){
 //Second Scene (Main Menu)
 function drawScene2 (){
     currentScene = 2;
+    this.menustyle = (0 - 2);
     background (112, 247, 90);
     rectAnimation2();
     fill(255, 255, 255);
@@ -80,6 +90,7 @@ function drawScene2 (){
     text("Royal Run",200, 135);
     drawButton(300, 200, "Rules");
     drawButton(200, 200, "About");
+    drawButton(250, 260, "Levels");
 }
 //Third Scene (Rules)
 function drawScene3 (){
@@ -122,7 +133,9 @@ function drawScene5(){
   text("Character Select", 290, 50);
   textSize(15);
   text("character #1", 130, 110);
+  image(person1, 60, 120, 150, 150)
   text("character #2", 470, 110);
+  randomperson2(465, 220);
   drawButton(527, 307, "Start");
   drawButton(23, 307, "Back");
 }
@@ -164,14 +177,31 @@ function rectAnimation2(){
 //YOU WIN
 function drawScene7(){
   currentScene = 7;
-  background(255, 238, 0)
+  background(win)
   textAlign(CENTER)
-  textSize(50);
+  textSize(20);
   fill(0)
-  text('YOU WIN!!!!', 300, 150);
+  text('Congratulation!', 300, 120);
+  drawButton(547, 315, "Next")
+  drawButton(5, 315, "Menu")
+} 
+function drawwin2(){
+  currentScene = 72;
+  background(win)
+  textAlign(CENTER)
+  fill(0)
   textSize(20)
   text('Congratulation!', 300, 120);
   drawButton(547, 315, "Next")
+  drawButton(5, 315, "Menu")
+}
+function drawwin3(){
+  currentScene = 73;
+  background(win)
+  textAlign(CENTER)
+  textSize(20)
+  text('Congratulation!', 300, 120);
+  drawButton(5, 315, "Menu")
 }
 //YOU LOSE
 function drawScene9(){
@@ -183,7 +213,8 @@ function drawScene9(){
   text('YOU LOSE!!!!', 300, 150);
   textSize(20)
   drawButton(547, 315, 'Menu')
-}
+} 
+
 //TRY AGAIN
 function drawScene10(){
   currentScene = 10;
@@ -196,8 +227,32 @@ function drawScene10(){
   text('oops', 300, 120)
   drawButton(547, 315, 'Again')
 }
+ function drawtryagain2(){
+  currentScene = 102;
+  background(255, 0, 0);
+  textAlign(CENTER);
+  textSize(50);
+  fill(0);
+  text('Try Again', 300, 150);
+  textSize(20)
+  text('oops', 300, 120)
+  drawButton(547, 315, 'Again')
+ }
+
 function drawScene11(){
   currentScene = 11;
+  background(0, 247, 28);
+  textAlign(CENTER);
+  textSize(50);
+  fill(0);
+  text('Well Done', 300, 150);
+  textSize(20)
+  text('Yay', 300, 120)
+  drawButton(547, 315, 'Next')
+}
+
+function drawScene112(){
+  currentScene = 112;
   background(0, 247, 28);
   textAlign(CENTER);
   textSize(50);
@@ -213,9 +268,9 @@ function drawScene11(){
 /////////////\\\\\\\\\\\\\
 
 function drawScene6(){
-  this.currentScene = 6;
-  this.background(bimage);
-  this.translate(-person.pos.x + 20, 0);
+  currentScene = 6;
+  background(bimage);
+  translate(-person.pos.x + 20, 0);
   person.display();
   person.update();
   person.edges();
@@ -223,7 +278,7 @@ function drawScene6(){
   person.applyForce(gravity);
 
 //displaying obstacles and collectables
-for (let i = 0; i < rec.length; i++){
+for (let i = 0; i < rec.length - 110; i++){
   if (person.hitsBlock(rec[i].x, rec[i].y)){
 
     drawScene6();
@@ -237,7 +292,7 @@ for (let i = 0; i < rec.length; i++){
       drawScene9();
     }
   
-for (let i = 0; i < collect.length; i++){ 
+for (let i = 0; i < collect.length - 30; i++){ 
 if(person.hits(collect[i].x,collect[i].y)){
   person.score++;
   //collect[i].trans = 0;
@@ -253,29 +308,74 @@ if(person.hits(collect[i].x,collect[i].y)){
  }
 
 function drawlvl2(){
-  person = new Person();
   currentScene = 62;
-  background(bimage);
+  background(lvl2back);
+  translate(-person.pos.x + 20, 0);
   person.display();
   person.update();
   person.edges();
-  translate(-person.pos.x + 20, 0);
+  person.mass = 10;
   var gravity = createVector(0, 0.2);
   person.applyForce(gravity);
-
-
-   //displaying obstacles and collectables
-  
-   // rec[i].display();
-  
-  
-  if (person.life === 0) {
-    drawScene9();
-  }
-
  
- // collect[i].display();
-  person.vel = createVector(3,0);
+
+//displaying obstacles and collectables
+for (let i = 0; i < rec.length - 130; i++){
+  if (person.hitsBlock(rec[i].x, rec[i].y)){
+
+    drawlvl2();
+    person.life --;
+
+  }
+     rec[i].display();
+}
+  if (person.life === 0){
+      drawScene9();
+    }
+  
+for (let i = 0; i < collect.length; i++){ 
+if(person.hits(collect[i].x,collect[i].y)){
+  person.score++;
+  person.totalscore++
+ collect[i].x -= 100;
+  
+ }
+   collect[i].display(); 
+}
+}
+function drawlvl3(){
+  currentScene = 63;
+  background(lvl3back);
+  translate(-person.pos.x + 20, 0);
+  person.display();
+  person.update();
+  person.edges();
+  person.mass = 10;
+  var gravity = createVector(0, 0.2);
+  person.applyForce(gravity);
+ 
+
+//displaying obstacles and collectables
+for (let i = 0; i < rec.length; i++){
+  if (person.hitsBlock(rec[i].x, rec[i].y)){
+
+    drawlvl3();
+    //person = new Person();
+    person.life --;
+  }
+     rec[i].display();
+}
+  if (person.life === 0){
+      drawScene9();
+    }
+  for (let i = 0; i < collect.length - 10; i++){ 
+if(person.hits(collect[i].x,collect[i].y)){
+  person.score++;
+  person.totalscore++
+ collect[i].x -= 100;
+   }
+   collect[i].display();
+}
 }
 
   //////////\\\\\\\\\\\         
@@ -293,7 +393,31 @@ function drawScene8(){
     drawScene9();
   }
 }
-
+//Second Scene of questions
+function drawquestion2(){
+  currentScene = 82;
+  background (mouseX, 200, mouseY);
+  questions();
+  //question = new questions();
+  question.display();
+  if(questions.tiesGood === 4){
+  }
+  if(questions.triesBad === 6){
+    drawScene9();
+  }
+}
+//Thirds scene of questions
+function drawquestion3(){
+  currentScene = 83;
+  background (mouseX, 200, mouseY);
+  questions();
+  question.display();
+  if(questions.tiesGood === 4){
+  }
+  if(questions.triesBad === 6){
+    drawScene9();
+  }
+}
 function draw(){
   
     if(currentScene===0){
@@ -332,100 +456,64 @@ function draw(){
       } if (currentScene === 62){
         drawlvl2();
         translate(person.pos.x, 0);
+        textSize(15);
+        text('Score:' + person.totalscore, 0, 345);
+      text('Jumps:'+ person.jump, 100, 345)
+      text('Lives:'+ person.life, 200, 345);
       }
-    
-  //drawlvl2();
-  
-  
-  /*textSize(100);
-  text('thank u, next', width/2-280, height/2);
-  
-   textSize(90);
+  if (currentScene === 63){
+        drawlvl3();
+        translate(person.pos.x, 0);
+        textSize(15);
+      text('Score:' + person.totalscore, 0, 345);
+      text('Jumps:'+ person.jump, 100, 345)
+      text('Lives:'+ person.life, 200, 345);
+      }
+  if (currentScene === 62 && person.pos.x >= 4980){
+        drawwin2();
+  } 
+  if (currentScene === 63 && person.pos.x >= 5950){
+    drawwin3();
+  }if (currentScene === 72){
+    drawwin2();
+  } if (currentScene === 73){
+    drawwin3();
+  }
+   if (currentScene === 62){
+    translate(-person.pos.x, 1);
+   textSize(40);
   fill(random(255),random(255),random(255));
-text('thank u, next', width/2-280, height/2);*/
+text('Coin Rush', 500, 250);
+  } 
+  if (currentScene === 63){
+    translate(-person.pos.x, 1);
+   textSize(40);
+  fill(random(255),random(255),random(255));
+text('Tornado', 500, 250);
+  }
+  if (currentScene === 12){
+    levelmenu3();
+  } if (currentScene === 82){
+    drawquestion2();
+  } if (currentScene === 112){
+    drawScene112();
+  } if (currentScene === 102){
+    drawtryagain2();
+  } if (currentScene === 14){
+    this.menustyle = 1;
+  } if (currentScene === 2){
+    this.menustyle = 0;
+  }
   
-  
+  //drawScene5();
     }
 
-  
 
-function mouseClicked() {
-  //SCENE CHANGES
-    if ( currentScene === 1 && mouseX >= 548 && mouseX <= 618    && mouseY >= 315 && mouseY <= 355) {
-        drawScene2();
-        //currentScene++;
-    }  if (currentScene === 2 && mouseX >= 300 && mouseX <= 370 && mouseY >= 200 && mouseY <= 240){
-        drawScene3();
-        //currentScene++;
-      
-      } else if (currentScene === 2 && mouseX >= 200 && mouseX <= 270 && mouseY >= 200 && mouseY <= 240){
-        drawScene4();
-      } if (currentScene === 4 && mouseX >= 23 && mouseX <= 93 && mouseY >= 307 && mouseY <= 347){
-        drawScene2();
-      } if (currentScene === 3 && mouseX >= 23 && mouseX <= 93 && mouseY >= 307 && mouseY <= 347){
-        drawScene2();
-      } if (currentScene === 3 && mouseX >= 527 && mouseX <= 597 && mouseY >= 307 && mouseY <= 347){
-        drawScene5();
-      } if (currentScene === 5 && mouseX >= 23 && mouseX <= 93 && mouseY >= 307 && mouseY <= 347){
-        drawScene3();
-      } if (currentScene === 5 && mouseX >= 527 && mouseX <= 597 && mouseY >= 307 && mouseY <= 347){
-        drawScene6();
-      } if (currentScene === 7 && mouseX >= 548 && mouseX <= 618 && mouseY >= 315 && mouseY <= 355){
-        drawScene8();
-      }
-  if (currentScene === 9 && mouseX >=547 && mouseX <= 617 && mouseY >= 315 && mouseY <= 355)      {
-        drawScene2();
-        person = new Person();
-      } 
-  
-  //QUESTIONS CORRECT
-  //addition
-  if (currentScene ===8 && question.addition && mouseX >= 100 && mouseX <= 170 && mouseY >= 200 && mouseY <= 240){
-    drawScene11();
-  }
-  if (currentScene ===8 && question.addition && mouseX >= 280 && mouseX <= 350 && mouseY >= 200 && mouseY <= 240){
-      drawScene10();
-      }
-    if (currentScene ===8 && question.addition && mouseX >= 460 && mouseX <= 510 && mouseY >= 200 && mouseY <= 140){
-      drawScene10();
-  }
-  
-  //subtraction
-  if (currentScene ===8 && question.subtract && mouseX >= 280 && mouseX <= 350 && mouseY >= 200 && mouseY <= 240){
-    drawScene6();
-    // person = new Person();
-    // person.vel = createVector(4, 0)
-    drawlvl2();
-  }
-  if (currentScene ===8 && question.subtract && mouseX >= 100 && mouseX <= 170 && mouseY >= 200 && mouseY <= 240){
-      drawScene10();
-      }
-    if (currentScene ===8 && question.subtract && mouseX >= 460 && mouseX <= 510 && mouseY >= 200 && mouseY <= 240){
-      drawScene10();
-  }
-  //multiplication
-  if (currentScene ===8 && question.multiply && mouseX >= 460 && mouseX <= 510 && mouseY >= 200 && mouseY <= 240){
-    drawScene11();
-  }
-  if (currentScene ===8 && question.multiply && mouseX >= 100 && mouseX <= 170 && mouseY >= 200 && mouseY <= 240){
-      drawScene10();
-      }
-    if (currentScene ===8 && question.multiply && mouseX >= 280 && mouseX <= 350 && mouseY >= 200 && mouseY <= 140){
-      drawScene10();
-  }
-  
-  //Correct Scene
-  if (currentScene ===11 && mouseX >= 547 && mouseX <= 617 && mouseY >= 315 && mouseY <= 355){
-    drawScene8();
-    question = new questions();
-  }
-  //Wrong Scene
-  if (currentScene ===10 && mouseX >= 547 && mouseX <= 617 && mouseY >= 315 && mouseY <= 355){
-    drawScene8();
-    question = new questions();
-  }
-      
-}
+  //////////\\\\\\\\\\\         
+ //** MouseClicked** \\
+/////////////\\\\\\\\\\\\
+
+//in Other file 
 
 
 function keyPressed(){
@@ -434,4 +522,4 @@ function keyPressed(){
     person.applyForce(jump);
     person.jump++;
   }
-}
+  }
