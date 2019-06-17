@@ -12,7 +12,7 @@ class coin {
   
   display(){
     strokeWeight(1);
-    fill(255, 255, 255, this.trans);
+    fill(233, 237, 33, this.trans);
     ellipse(this.x, this.y, this.length, this.height, this.r);
 }
 }
