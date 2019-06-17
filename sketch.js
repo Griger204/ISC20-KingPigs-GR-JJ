@@ -1,27 +1,20 @@
-//let bimage;
-//let grassImage;
-//let collectImage
-function preload(){
-//preloading images
-bimage = loadImage('Untitled-1.png');
-lvl2back = loadImage('Untitled drawing.jpg')
-lvl3back = loadImage('lvl3back.jpg')
-lvllock = loadImage('lockedlevel.jpg')
-collectimage = loadImage('1241505.png');
-grassImage = loadImage('vPyllu4r_400x400 (1).png');
-logo = loadImage('KingPigLogo.png');
-win = loadImage('youwin.jpg');
-person1 = loadImage('stickman.png')
-//person2 = loadImage('unicornperson.png')
-
-}
-
 var person;
 var hit;
 var rec = [];
 var collect = [];
 
 function setup() {
+  //preloading images
+bimage = loadImage('Untitled-1.png');
+lvl2back = loadImage('Untitled drawing.jpg')
+lvl3back = loadImage('lvl3back.jpg')
+lvllock =loadImage('lockedlevel.jpg')
+collectimage =loadImage('1241505.png');
+logo = loadImage('KingPigLogo.png');
+win = loadImage('youwin.jpg');
+person1 = loadImage('stickman.png')
+//person2 = loadImage('unicornperson.png')
+  
 createCanvas(623, 360);
 question = new questions();
 //calling obstacles and collectables as an array
@@ -45,20 +38,6 @@ for (let i = 0; i < 70; i++){
 //Sets current scene
 var currentScene=0;
 
-//Team Name color Animation
-function tnameColor() {
-  var r = 229;
-  var g = 57;
-  var b = 94;
-  fill(r, g, b);
-  textSize(35);
-  text("King Pigs", 210, 300);
-  
-    r+=1;
-    g-=1;
-    b+=1;
-}
-
 function rectColorRules(){
   fill(mouseX, mouseY, 190);
   rect(20, 10, 580, 340);
@@ -68,10 +47,10 @@ function rectColorRules(){
 function drawScene1 (){
     currentScene = 1;
     background (104, 162, 255);
-    image(logo, 40, -70);
     fill(229, 57, 94);
     textSize(35);
-    //text("King Pigs", 200, 300);
+    text("King Pigs", 200, 300);
+    image(logo, 40, -70);
     drawButton(548, 315, "Next");
 }
 
@@ -424,7 +403,7 @@ function draw(){
       rectAnimation();
       drawScene1();
     } if (currentScene === 1){
-      tnameColor();
+      //tnameColor();
     } if (currentScene === 2){
       rectAnimation2();
       drawScene2();
