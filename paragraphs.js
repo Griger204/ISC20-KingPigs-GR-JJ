@@ -1,11 +1,6 @@
 function Instructions(){
-   text("* Use the '-->', '<--' and 'Space' Keys to move and jump!", 50, 100);
-  text("* Avoid Obstacles and Holes", 50, 115);
-  text("* Start with 3 lives but you get +1 every Level Passed! (Up to 10)", 50, 130);
-  text("* When Level Completed, you must answer 3 questions to continue! (6 tries ONLY)", 50, 145);
-  text("* Collect coins on your way!", 50, 160);
-  text("* GAME OVER = got questions wrong 6 times OR ran out of lives OR finished the game", 50, 175);
-  text("MAIN OBJECTIVE: Get your character back home while avoiding obstacles and answering questions!", 40, 200);
+ image(rule1, -50, 80, 520, 285);
+ image(rule2, 200, -48, 470, 410);
 }
 
 function AboutUs(){
